@@ -1,0 +1,3 @@
+NAME PMP2L97 WINDOWAPI
+STACKSIZE 0x4000
+DESCRIPTION "Fan/temp/voltage monitor for P2L97 mainboards"

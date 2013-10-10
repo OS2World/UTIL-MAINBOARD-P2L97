@@ -1,0 +1,129 @@
+/* pmp2l97.rc */
+
+#include <os2.h>
+#include "version.h"
+#include "pmp2l97.h"
+
+ICON ID_PMP2L97 pmp2l97.ico
+
+MENU ID_PMP2L97
+BEGIN
+     MENUITEM "~Always on top\tCtrl+A",  IDM_ONTOP
+     MENUITEM "~Titlebar\tCtrl+B", IDM_TITLEBAR
+     MENUITEM "~Setup...", IDM_SETUP
+     MENUITEM SEPARATOR
+     MENUITEM "About...", IDM_ABOUT
+     MENUITEM "E~xit\tF3", IDM_EXIT
+END
+
+DLGTEMPLATE ID_PMP2L97
+BEGIN
+     DIALOG "LM78 monitor", ID_PMP2L97, 60,101,120,67,
+            FS_DLGBORDER |
+            FS_NOBYTEALIGN |
+            WS_VISIBLE |
+            FS_TASKLIST,
+            FCF_ICON |
+            FCF_TITLEBAR |
+            FCF_MINBUTTON |
+            FCF_SYSMENU
+     PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+     BEGIN
+          GROUPBOX "Fans", -1, 1, 33, 68, 32, WS_VISIBLE | WS_GROUP
+          LTEXT    "Chassis", -1, 5, 51, 25, 8, WS_VISIBLE | DT_VCENTER
+          LTEXT    "CPU", -1, 5, 43, 25, 8, WS_VISIBLE | DT_VCENTER
+          LTEXT    "Power", -1, 5, 35, 25, 8, WS_VISIBLE | DT_VCENTER
+          RTEXT    "", IDD_FAN_CHASSIS, 29, 51, 36, 8, WS_VISIBLE | DT_VCENTER
+          PRESPARAMS PP_FOREGROUNDCOLOR, 0x0000FF
+          RTEXT    "", IDD_FAN_CPU, 29, 43, 36, 8, WS_VISIBLE | DT_VCENTER
+          PRESPARAMS PP_FOREGROUNDCOLOR, 0x0000FF
+          RTEXT    "", IDD_FAN_POWER, 29, 35, 36, 8, WS_VISIBLE | DT_VCENTER
+          PRESPARAMS PP_FOREGROUNDCOLOR, 0x0000FF
+
+          GROUPBOX "Temperatures", -1, 1, 1, 68, 32, WS_VISIBLE | WS_GROUP
+          LTEXT    "Mainboard", -1, 5, 19, 38, 8, WS_VISIBLE | DT_VCENTER
+          LTEXT    "CPU1", -1, 5, 11, 38, 8, WS_VISIBLE | DT_VCENTER
+          LTEXT    "CPU2", -1, 5, 3, 38, 8, WS_VISIBLE | DT_VCENTER
+          RTEXT    "", IDD_TEMP_MB, 45, 19, 20, 8, WS_VISIBLE | DT_VCENTER
+          PRESPARAMS PP_FOREGROUNDCOLOR, 0x0000FF
+          RTEXT    "", IDD_TEMP_CPU1, 45, 11, 20, 8, WS_VISIBLE | DT_VCENTER
+          PRESPARAMS PP_FOREGROUNDCOLOR, 0x0000FF
+          RTEXT    "", IDD_TEMP_CPU2, 45, 3, 20, 8, WS_VISIBLE | DT_VCENTER
+          PRESPARAMS PP_FOREGROUNDCOLOR, 0x0000FF
+
+          GROUPBOX "Voltages", -1, 71, 1, 48, 65,  WS_VISIBLE | WS_GROUP
+          LTEXT    "Vcore", -1, 75, 51, 18, 8,  WS_VISIBLE | DT_VCENTER
+          LTEXT    "+3.3V", -1, 75, 43, 18, 8,  WS_VISIBLE | DT_VCENTER
+          LTEXT    "+5V", -1, 75, 35, 18, 8,  WS_VISIBLE | DT_VCENTER
+          LTEXT    "+12V", -1, 75, 27, 18, 8,  WS_VISIBLE | DT_VCENTER
+          LTEXT    "-12V", -1, 75, 19, 15, 8,  WS_VISIBLE | DT_VCENTER
+          LTEXT    "-5V", -1, 75, 11, 18, 8,  WS_VISIBLE | DT_VCENTER
+          RTEXT    "", IDD_V_VCORE, 95, 51, 20, 8,  WS_VISIBLE | DT_VCENTER
+          PRESPARAMS PP_FOREGROUNDCOLOR,  0x0000FF
+          RTEXT    "", IDD_V_3_3V, 95, 43, 20, 8,  WS_VISIBLE | DT_VCENTER
+          PRESPARAMS PP_FOREGROUNDCOLOR,  0x0000FF
+          RTEXT    "", IDD_V_5V, 95, 35, 20, 8,  WS_VISIBLE | DT_VCENTER
+          PRESPARAMS PP_FOREGROUNDCOLOR,  0x0000FF
+          RTEXT    "", IDD_V_12V, 95, 27, 20, 8,  WS_VISIBLE | DT_VCENTER
+          PRESPARAMS PP_FOREGROUNDCOLOR,  0x0000FF
+          RTEXT    "", IDD_V_M12V, 92, 19, 23, 8,  WS_VISIBLE | DT_VCENTER
+          PRESPARAMS PP_FOREGROUNDCOLOR,  0x0000FF
+          RTEXT    "", IDD_V_M5V, 95, 11, 20, 8,  WS_VISIBLE | DT_VCENTER
+          PRESPARAMS PP_FOREGROUNDCOLOR,  0x0000FF
+     END
+END
+
+DLGTEMPLATE ID_SETUP
+BEGIN
+     DIALOG "Setup", ID_SETUP, 89, 106, 131, 50,  FS_DLGBORDER |
+                                                  FS_NOBYTEALIGN |
+                                                  WS_VISIBLE,
+                                                  FCF_TITLEBAR |
+                                                  FCF_SYSMENU
+     PRESPARAMS PP_FONTNAMESIZE,  "8.Helv"
+     BEGIN
+          GROUPBOX "Degrees", -1, 1, 25, 45, 24, WS_VISIBLE | WS_GROUP
+          AUTORADIOBUTTON "Celsius", IDD_DEG_C, 4, 35, 40, 8, WS_VISIBLE
+          AUTORADIOBUTTON "Fahrenheit", IDD_DEG_F, 4, 27, 40, 8, WS_VISIBLE
+
+          GROUPBOX "Refresh interval", -1, 48, 25, 82, 24, WS_VISIBLE | WS_GROUP
+          SLIDER IDD_REFRESH, 51, 34, 76, 9, WS_VISIBLE |
+                                             WS_TABSTOP |
+                                             SLS_HORIZONTAL |
+                                             SLS_CENTER |
+                                             SLS_SNAPTOINCREMENT |
+                                             SLS_HOMEBOTTOM |
+                                             SLS_PRIMARYSCALE1
+               CTLDATA 12, 0, 10, 0, 10, 0
+          CTEXT "500 ms", IDD_REFRESH_TEXT, 51, 27, 76, 7, WS_VISIBLE | DT_VCENTER
+          DEFPUSHBUTTON "~Ok",  DID_OK , 25, 4, 36, 15,  WS_VISIBLE
+          PUSHBUTTON "~Cancel", DID_CANCEL, 70, 4, 36, 15, WS_VISIBLE
+     END
+END
+
+DLGTEMPLATE ID_ABOUT
+BEGIN
+     DIALOG "About", ID_ABOUT, 40, 70, 150, 75,  FS_DLGBORDER |
+                                                 FS_NOBYTEALIGN |
+                                                 WS_VISIBLE,
+                                                 FCF_TITLEBAR |
+                                                 FCF_SYSMENU
+     PRESPARAMS PP_FONTNAMESIZE,  "8.Helv"
+     BEGIN
+          GROUPBOX "", -1, 5, 25, 142, 45,  WS_VISIBLE | WS_GROUP
+          ICON ID_PMP2L97, -1, 15, 40, 30, 30,  WS_VISIBLE
+          LTEXT "LM78/Winbond monitor", -1, 40, 54, 95, 8,  WS_VISIBLE | DT_VCENTER
+          LTEXT "Version " VERSION "", -1, 40, 46, 95, 8,  WS_VISIBLE | DT_VCENTER
+          LTEXT Author, -1, 40, 38, 90, 8,  WS_VISIBLE | DT_VCENTER
+          LTEXT Amender, -1, 10, 30, 132, 8,  WS_VISIBLE | DT_VCENTER
+          DEFPUSHBUTTON "~Ok",  DID_OK , 57, 4, 36, 15,  WS_VISIBLE
+     END
+END
+
+ACCELTABLE ID_PMP2L97
+BEGIN
+  "a",      IDM_ONTOP,                   CHAR,  AF_CONTROL
+  "b",      IDM_TITLEBAR,                CHAR,  AF_CONTROL
+  VK_F3,    IDM_EXIT,                    VIRTUALKEY
+END
+
